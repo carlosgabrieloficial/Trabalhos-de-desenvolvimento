@@ -3,7 +3,8 @@
 escolha = 0
 while escolha != 5:
 
-    print("""
+    print("""   
+    === Clínica Vida+ ===
     [1] Cadastrar Paciente
     [2] Ver estatísticas
     [3] Buscar pacientes
@@ -14,7 +15,7 @@ while escolha != 5:
     escolha = int(input("Por Favor, escolha uma das opção : "))
    
     if escolha == 1   :
-        print("Opção [1] Cadastrar Paciente ")
+        print("Cadastrar Paciente ")
 
     elif escolha == 2 :
         print("Opção [2] Ver estatísticas ")

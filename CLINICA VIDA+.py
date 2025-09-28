@@ -18,7 +18,7 @@ while escolha != 5:
         print("Cadastrar Paciente ")
 
     elif escolha == 2 :
-        print("Opção [2] Ver estatísticas ")
+        print("Opção [2], Ver estatísticas ")
     
     elif escolha == 3 :
         print("Opção [3] Buscar pacientes")

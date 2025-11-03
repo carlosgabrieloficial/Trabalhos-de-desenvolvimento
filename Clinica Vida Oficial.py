@@ -1,15 +1,41 @@
 banco_de_dados = []
 
-
 def cadastro_paciente():
     paciente = {}
 
-    paciente["Nome"] = str(input("Nome : ")).upper().strip()
-    paciente["Idade"] = int(input("Idade : "))
-    paciente["Telefone"] = str(input("Telefone : "))
+    paciente["Nome"]=str(input("Nome :")).upper().strip()
+
+    while True:
+
+        try:
+            
+            idade = int(input("Idade :"))
+            if idade <= 0:
+                
+                print("Por favor,insira uma idade valida (maior que 0)")
+                continue
+
+            paciente["Idade"] = idade
+            break
+
+        except ValueError:
+            print("Idade invalida.Por favor,insira um número inteiro")
+
+    while True :
+
+        telefone = str(input("Telefone: ")).strip()
+
+        if telefone.isdigit() and len(telefone) >= 10:
+            
+            paciente["Telefone"] = telefone
+            break
+        
+        else:
+            print("Numero de telefone inválido. Por favor, insira um numero válido de no mínimo 10 digitos")
 
     banco_de_dados.append(paciente)
-    print("Paciente cadastrado com Sucesso")
+    print("Paciente cadastrado com sucesso")
+    return paciente
 
 def exibir_estatisticas() : 
     
@@ -22,7 +48,7 @@ def exibir_estatisticas() :
 
     soma_idades_pacientes = sum(paciente["Idade"] for paciente in banco_de_dados)
 
-    media_idade_pacientes = soma_idades_pacientes/len(banco_de_dados)
+    media_idade_pacientes = soma_idades_pacientes/total_pacientes_cadastrados
 
     paciente_mais_novo = min(banco_de_dados, key=lambda pessoa:pessoa["Idade"])
 
@@ -30,61 +56,63 @@ def exibir_estatisticas() :
 
     print(f"O total de pacientes cadastrados foi : {total_pacientes_cadastrados}")
 
-    print(f"A média de idade dos pacientes foi de : {media_idade_pacientes}")
+    print(f"A idade média dos pacientes foi de  : {media_idade_pacientes:.2f}")
 
-    print(f"O paciente mais novo cadastrado é : {paciente_mais_novo}")
+    print(f"O paciente mais novo cadastrado é : {paciente_mais_novo["Nome"]} com {paciente_mais_novo["Idade"]} anos.")
 
-    print(f"O paciente mais velhi cadastrado é : {paciente_mais_velho}")
+    print(f"O paciente mais velho cadastrado é : {paciente_mais_velho["Nome"]} com {paciente_mais_velho["Idade"]} anos.")
 
 def buscar_paciente():
 
-    paciente = (input("Nome do paciente que deseja pesquisar : "))
+    paciente_nome = (input("Nome do paciente que deseja pesquisar : ")).upper().strip()
+
     for pessoa in banco_de_dados:
-        if pessoa["Nome"].upper() == paciente.upper():
-            print(f"Paciente encontrado\n,{pessoa}\n")
+        
+        if pessoa["Nome"].upper() == paciente_nome.upper():
+            print(f"=== PACIENTE ENCONTRADO ===")
+            print(f"Nome : {pessoa["Nome"]}")
+            print(f"Idade : {pessoa["Idade"]}")
+            print(f"Telefone : {pessoa["Telefone"]}")
             return
-    print("Paciente não encontrado")
+    print("=== Paciente não encontrado ===")
 
 def exibir_lista_pacientes():
     for paciente in banco_de_dados:
-        print(paciente)
-        print()
-
-
-def menu_clinica_vida_():
+        print(f"Nome :{paciente["Nome"]}")
+        print(f"Idade :{paciente["Idade"]}")
+        print(f"Telefone :{paciente["Telefone"]}")
+        print("="*30)
+        
+def menu():
 
     print("=== SISTEMA CLÍNICA VIDA + ===\n" \
           
-    "[1] CADASDTRAR PACIENTE\n" 
+    "[1] CADASTRAR PACIENTE\n" 
     "[2] VER ESTATÍSTICAS\n" \
     "[3] BUSCAR PACIENTE\n" \
-    "[4] LISTAR OS PACIENTES\n" \
+    "[4] LISTAR PACIENTES\n" \
     "[5] SAIR")
-    print("="*20)
+    print("="*30)
 
+    while True :
+        escolha = input("Escolha uma opção entre [1-5] :\n")
+                
+        if escolha == "1" :
+            cadastro_paciente()
 
-while True : 
+        elif escolha == "2" :
+            exibir_estatisticas()
 
-    menu_clinica_vida_()
-    escolha = int(input("Escolha uma opção entre [1-5] :\n"))
-            
-    if escolha == 1 :
-        cadastro_paciente()
+        elif escolha == "3" :
+            buscar_paciente()
 
-    elif escolha == 2 :
-        exibir_estatisticas()
+        elif escolha == "4" : 
+            exibir_lista_pacientes()
 
-    elif escolha == 3 :
-        buscar_paciente()
+        elif escolha == "5" : 
+            print("=== FIM DO PROGRAMA ===")
+            break
 
-    elif escolha == 4 : 
-        exibir_lista_pacientes()
-
-    elif escolha == 5 : 
-        print("=== FIM DO PROGRAMA ===")
-        break
-
-    else:
-        print("Escolha incorreta, tente novamente escolha entre [1-5]")
+        else:
+            print("Escolha incorreta, tente novamente escolha entre [1-5]")
         
-

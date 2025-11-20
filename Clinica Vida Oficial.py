@@ -77,42 +77,50 @@ def buscar_paciente():
     print("=== Paciente não encontrado ===")
 
 def exibir_lista_pacientes():
+
+    if not banco_de_dados:
+        print("Nenhum paciente cadastrado\nTente novamente")
+        return
+
     for paciente in banco_de_dados:
         print(f"Nome :{paciente["Nome"]}")
         print(f"Idade :{paciente["Idade"]}")
         print(f"Telefone :{paciente["Telefone"]}")
         print("="*30)
         
-def menu():
 
-    print("=== SISTEMA CLÍNICA VIDA + ===\n" \
-          
-    "[1] CADASTRAR PACIENTE\n" 
-    "[2] VER ESTATÍSTICAS\n" \
-    "[3] BUSCAR PACIENTE\n" \
-    "[4] LISTAR PACIENTES\n" \
-    "[5] SAIR")
+def menu():
+    print("=== SISTEMA CLÍNICA VIDA + ===")
+    print("[1] CADASTRAR PACIENTE")
+    print("[2] VER ESTATÍSTICAS")
+    print("[3] BUSCAR PACIENTE")
+    print("[4] LISTAR PACIENTES")
+    print("[5] SAIR")
     print("="*30)
 
-    while True :
-        escolha = input("Escolha uma opção entre [1-5] :\n")
+
+while True:
+    
+    menu()
+
+    escolha = input("Escolha uma opção entre [1-5] :\n")
                 
-        if escolha == "1" :
+    if escolha == "1" :
             cadastro_paciente()
 
-        elif escolha == "2" :
+    elif escolha == "2" :
             exibir_estatisticas()
 
-        elif escolha == "3" :
+    elif escolha == "3" :
             buscar_paciente()
 
-        elif escolha == "4" : 
+    elif escolha == "4" : 
             exibir_lista_pacientes()
 
-        elif escolha == "5" : 
+    elif escolha == "5" : 
             print("=== FIM DO PROGRAMA ===")
             break
 
-        else:
+    else:
             print("Escolha incorreta, tente novamente escolha entre [1-5]")
         
